@@ -16,7 +16,6 @@ exports.objectsAnswers =  {
         arr.push(name +': '+obj[name]);
       };
     };
-    console.log(arr);
     return arr;
   }
 };

@@ -26,7 +26,6 @@ exports.numbersAnswers = {
 
   multiply: function(a, b) {
     var precisionNumber = (a*b).toPrecision(b.toString().length-2);
-    console.log(b.toString().length);
     return Number(precisionNumber);
   }
 };

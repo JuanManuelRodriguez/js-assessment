@@ -2,24 +2,38 @@ exports = (typeof window === 'undefined') ? global : window;
 
 exports.recursionAnswers = {
   listFiles: function(data, dirName) {
-    console.log(data.files);
-    console.log(data.files[1].files);
-    var arr=[];
+    var arrOfFiles=[];
+    var dirs=[];
 
-    for (var i=0; i < data.files.length; i++){
-      if ((typeof data.files[i]) === "string"){
-        console.log(data.files[i]);
-        return data.files[i];
-      }
-      else {
-        //TODO: recursion
-        listFiles (data.files,dirName);
+    function proccessDir(dir){
+      var i,len,file;
+      var files = dir.files;
+
+      dirs.push(dir.dir);
+
+      for (i=0, len= files.length; i < len; i++){
+        file = files[i];
+        if (typeof file === 'string') {
+          if (!dirName || dirs.indexOf(dirName) > -1 ) {
+            arrOfFiles.push(files[i]);
+          }
+        }
+        else {
+           proccessDir(files[i]);
+        };
       };
+      dirs.pop();// cuando termina de agreegar los archivos de la dir y subdir de 'js', saca los dirName
+      // del arreglo para que no guarde los proximos archivos en la lista de archivos, ya que el dirName 'js'
+      // no estara en el arreglo y no pasara el IF (dirs.indexof(dirName)>-1)
     };
+
+    proccessDir(data);
+
+    return arrOfFiles;
   },
 
   permute: function(arr) {
-
+    
   },
 
   fibonacci: function(n) {
