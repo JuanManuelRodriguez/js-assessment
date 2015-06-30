@@ -46,7 +46,7 @@ exports.recursionAnswers = {
         else{
           showResult();
         };
-        arr.splice(i,0,item);
+        a.splice(i,0,item);
         arrTemp.pop();
       };
       return arrResult;
@@ -73,6 +73,16 @@ exports.recursionAnswers = {
   },
 
   validParentheses: function(n) {
+    var parentheses=[],o = n,c= n,s='';
 
+    function permutationParentheses(str,open,close) {
+      if (close === 0) {parentheses.push(str)}
+      else {
+        if (open > 0) {permutationParentheses(str+'(',open-1,close)};
+        if (open < close){permutationParentheses(str+')',open,close-1)};
+      }
+    };
+    permutationParentheses(s,o,c);
+    return parentheses;
   }
 };
